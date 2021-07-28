@@ -6,8 +6,12 @@ import {
   PermissionsAndroid,
   StyleSheet,
   StatusBar,
+  BackHandler,
+  NativeMethods,
 } from 'react-native';
 import {MapView} from 'react-native-amap3d';
+
+import BackHome from '../../components/BackHome';
 
 const styles = StyleSheet.create({
   fullScreen: {
@@ -86,6 +90,23 @@ export class HomeScreen extends React.Component {
       ]);
     }
   }
+
+  componentDidMount() {
+    this.backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      this.backAction,
+    );
+  }
+
+  componentWillUnmount() {
+    this.backHandler.remove();
+  }
+
+  backAction = () => {
+    console.log('backAction');
+    BackHome.go();
+    return true;
+  };
 
   mapViewRef = null;
 
