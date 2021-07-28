@@ -104,7 +104,6 @@
 				7F2859FA6F8C2CBF2C9ACCD3 /* Pods-locationApps-locationAppsTests.debug.xcconfig */,
 				573625AD9015624327A8A0D8 /* Pods-locationApps-locationAppsTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -484,7 +483,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FK6X42T8L5;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = locationApps/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -496,8 +497,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.block4.89app;
 				PRODUCT_NAME = locationApps;
+				PROVISIONING_PROFILE_SPECIFIER = "89app-dev";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

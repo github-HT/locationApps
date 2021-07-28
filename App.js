@@ -4,6 +4,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {HomeScreen} from './src/pages/home/HomeScreen';
 import {DiscoveryScreen} from './src/pages/discovery/DiscoveryScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+// import {Initializer} from 'react-native-baidumap-sdk';
+// Initializer.init('6s1BDd7jUHhzUV8S8E3kMEyAKfqkKPrw');
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
