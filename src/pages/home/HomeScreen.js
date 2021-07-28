@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {
-  Button,
   Text,
   View,
   Platform,
   PermissionsAndroid,
   StyleSheet,
+  StatusBar,
 } from 'react-native';
 import {MapView} from 'react-native-amap3d';
 
@@ -77,6 +77,14 @@ export class HomeScreen extends React.Component {
     //   timestamp: 1446007304457.029, // 时间戳
     //   fromMockProvider: false,
     // };
+
+    // 动态获取定位权限
+    if (Platform.OS === 'android') {
+      PermissionsAndroid.requestMultiple([
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
+      ]);
+    }
   }
 
   mapViewRef = null;
@@ -86,13 +94,13 @@ export class HomeScreen extends React.Component {
     if (this.mapViewRef) {
       this.setState({
         locationConfig: {
-          accuracy: location.accuracy,
-          altitude: location.altitude,
-          heading: location.heading,
-          latitude: location.latitude,
-          longitude: location.longitude,
-          speed: location.speed,
-          timestamp: location.timestamp,
+          accuracy: location.accuracy || this.state.locationConfig.accuracy,
+          altitude: location.altitude || this.state.locationConfig.altitude,
+          heading: location.heading || this.state.locationConfig.heading,
+          latitude: location.latitude || this.state.locationConfig.latitude,
+          longitude: location.longitude || this.state.locationConfig.longitude,
+          speed: location.speed || this.state.locationConfig.speed,
+          timestamp: location.timestamp || this.state.locationConfig.timestamp,
         },
       });
       if (!this.state.isFixed) {
@@ -106,8 +114,10 @@ export class HomeScreen extends React.Component {
               rotation: 90,
               zoomLevel: 18,
               center: {
-                latitude: location.latitude,
-                longitude: location.longitude,
+                latitude:
+                  location.latitude || this.state.locationConfig.latitude,
+                longitude:
+                  location.longitude || this.state.locationConfig.longitude,
               },
             },
             1000,
@@ -129,6 +139,11 @@ export class HomeScreen extends React.Component {
           onLocation={this.onLocation}
         />
         <View style={styles.infoBox}>
+          <StatusBar
+            translucent={true}
+            backgroundColor={'transparent'}
+            barStyle={'dark-content'}
+          />
           <View style={styles.infoContent}>
             <View style={styles.infoContentItem}>
               <Text style={styles.infoContentItemText}>
