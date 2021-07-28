@@ -95,7 +95,7 @@ export class HomeScreen extends React.Component {
 
     Geolocation.getCurrentPosition(
       ({coords}) => {
-        console.log(Platform.OS, 'Geolocation', coords);
+        console.log('Geolocation', coords);
         this.setState({
           locationConfig: {
             accuracy: coords.accuracy,
@@ -113,13 +113,12 @@ export class HomeScreen extends React.Component {
       },
       {
         enableHighAccuracy: true,
-        timeout: 10 * 1000,
+        timeout: 5000,
       },
     );
     Geolocation.watchPosition(
       ({coords}) => {
         console.log(
-          Platform.OS,
           'watchPosition Geolocation',
           coords,
           typeof coords,
@@ -141,7 +140,7 @@ export class HomeScreen extends React.Component {
       },
       {
         enableHighAccuracy: true,
-        timeout: 10 * 1000,
+        timeout: 5000,
       },
     );
   }
