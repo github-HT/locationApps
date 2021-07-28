@@ -91,11 +91,9 @@ export class HomeScreen extends React.Component {
       android: '07ff3de85d9af09e6304f48340b1ee9c',
     });
 
-    console.log(Platform);
-
     Geolocation.getCurrentPosition(
       ({coords}) => {
-        console.log('Geolocation', coords);
+        console.log(Platform.OS, 'Geolocation', coords);
         this.setState({
           locationConfig: {
             accuracy: coords.accuracy,
@@ -119,6 +117,7 @@ export class HomeScreen extends React.Component {
     Geolocation.watchPosition(
       ({coords}) => {
         console.log(
+          Platform.OS,
           'watchPosition Geolocation',
           coords,
           typeof coords,
