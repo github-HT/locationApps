@@ -50,6 +50,6 @@ const styles = StyleSheet.create({
   infoContentItemText: {
     fontSize: 30,
     color: 'black',
-    flex:1,
+    flex: 1,
   },
 });
