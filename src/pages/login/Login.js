@@ -19,10 +19,7 @@ export default class Login extends Component {
   };
 
   toDiscovery = () => {
-    this.props.navigation.navigate('LocationMap', {
-      itemId: 86,
-      otherParam: 'anything you want here',
-    });
+    this.props.navigation.navigate('LocationMap', {});
   };
 
   render() {
