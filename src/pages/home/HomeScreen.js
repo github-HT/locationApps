@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   View,
-  Text,
   Platform,
   PermissionsAndroid,
   StyleSheet,
@@ -71,14 +70,14 @@ export class HomeScreen extends React.Component {
           screenOptions={({route}) => ({
             tabBarIcon: ({color, size, focused}) => {
               const Icons = {
-                LocationMap: require('../../../assets/img/location.png'),
-                Discovery: require('../../../assets/img/home.png'),
-                UserCenter: require('../../../assets/img/user.png'),
+                LocationMap: require('../../assets/img/location.png'),
+                Discovery: require('../../assets/img/home.png'),
+                UserCenter: require('../../assets/img/user.png'),
               };
               const FocusIcons = {
-                LocationMap: require('../../../assets/img/location-active.png'),
-                Discovery: require('../../../assets/img/home-active.png'),
-                UserCenter: require('../../../assets/img/user-active.png'),
+                LocationMap: require('../../assets/img/location-active.png'),
+                Discovery: require('../../assets/img/home-active.png'),
+                UserCenter: require('../../assets/img/user-active.png'),
               };
               return (
                 <Image
@@ -96,13 +95,13 @@ export class HomeScreen extends React.Component {
               title: '首页',
             }}
           />
-          {/* <Tab.Screen
+          <Tab.Screen
             name="Discovery"
             component={DiscoveryScreen}
             options={{
               title: '发现',
             }}
-          /> */}
+          />
           <Tab.Screen
             name="UserCenter"
             iconkey="home"
