@@ -48,15 +48,21 @@ export default class Animateds extends Component {
             style={styles.scrollViewStyle}
             pagingEnabled
             showsHorizontalScrollIndicator={false}
-            onScroll={Animated.event([
-              {
-                nativeEvent: {
-                  contentOffset: {
-                    x: this.scrollX,
+            onScroll={e => {
+              Animated.event(
+                [
+                  {
+                    nativeEvent: {
+                      contentOffset: {
+                        x: this.scrollX,
+                      },
+                    },
                   },
-                },
-              },
-            ])}
+                ],
+                {useNativeDriver: true},
+              );
+              this.scrollX.setValue(e.nativeEvent.contentOffset.x);
+            }}
             scrollEventThrottle={1}>
             {images.map((image, imageIndex) => {
               return (
