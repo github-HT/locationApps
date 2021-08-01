@@ -4,9 +4,9 @@ import {
   Platform,
   PermissionsAndroid,
   StyleSheet,
-  StatusBar,
   BackHandler,
   Image,
+  Text,
 } from 'react-native';
 
 import BackHome from '../../components/BackHome';
@@ -14,6 +14,8 @@ import {DiscoveryScreen} from '../discovery/DiscoveryScreen';
 import {LocationMap} from '../map/LocationMap';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import UserCenter from '../userCenter/UserCenter';
+import {connect} from 'react-redux';
+import {SafeAreaView} from 'react-native-safe-area-context';
 const Tab = createBottomTabNavigator();
 
 const styles = StyleSheet.create({
@@ -26,7 +28,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export class HomeScreen extends React.Component {
+export default class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
 
@@ -58,11 +60,6 @@ export class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.fullScreen}>
-        <StatusBar
-          translucent={true}
-          backgroundColor={'transparent'}
-          barStyle={'dark-content'}
-        />
         <Tab.Navigator
           tabBarOptions={{
             showLabel: false,

@@ -1,34 +1,56 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, StatusBar} from 'react-native';
+import {StyleSheet, View, Text} from 'react-native';
 
-import {Header, Button} from 'react-native-elements';
+import {Button} from 'react-native-elements';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {connect} from 'react-redux';
 import Animateds from './children/Animateds';
 
-export default class UserCenter extends Component {
-  toLogin = () => {
-    this.props.navigation.push('Login', {});
-  };
+import fontJson from '../../assets/iconfont/iconfont.json';
+console.log(fontJson.glyphs);
+const iconObj = {};
+fontJson.glyphs.map(item => {
+  iconObj[item.font_class] = ('\\u' + item.unicode).substr(0);
+});
+console.log(iconObj);
 
-  render() {
-    return (
-      <View style={styles.fullScreen}>
-        <Header
-          backgroundColor={'transparent'}
+export default connect(state => ({
+  ThemeType: state.ThemeReducer.ThemeType,
+  ActiveThemeContent: state.ThemeReducer.ActiveThemeContent,
+}))(
+  class UserCenter extends Component {
+    toLogin = () => {
+      this.props.navigation.push('Login', {});
+    };
+    componentDidMount() {
+      console.log(this.props);
+    }
+
+    render() {
+      const {ActiveThemeContent} = this.props;
+      console.log(ActiveThemeContent);
+      const {background} = ActiveThemeContent;
+      console.log(background.primary);
+      return (
+        <SafeAreaView style={styles.fullScreen}>
+          {/* <Header
+          backgroundColor={'white'}
           centerComponent={{text: '用户中心', style: styles.headerCenterText}}
-        />
-        <StatusBar
-          translucent={true}
-          backgroundColor={'transparent'}
-          barStyle={'dark-content'}
-        />
-        <View style={styles.fullScreen}>
-          <Button title="去登录" onPress={this.toLogin} />
-          <Animateds />
-        </View>
-      </View>
-    );
-  }
-}
+        /> */}
+          <View style={styles.fullScreen}>
+            <Text style={styles.iconStyle}>{iconObj.home}</Text>
+            <Button
+              title="去登录"
+              buttonStyle={ActiveThemeContent.background.primary}
+              onPress={this.toLogin}
+            />
+            <Animateds />
+          </View>
+        </SafeAreaView>
+      );
+    }
+  },
+);
 
 const styles = StyleSheet.create({
   fullScreen: {
@@ -37,5 +59,15 @@ const styles = StyleSheet.create({
   headerCenterText: {
     fontSize: 17,
     fontWeight: '600',
+  },
+  button: {
+    backgroundColor: 'red',
+    color: 'red',
+  },
+  iconStyle: {
+    fontFamily: 'iconfont',
+    fontSize: 24,
+    marginTop: 10,
+    marginLeft: 10,
   },
 });

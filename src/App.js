@@ -1,21 +1,25 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import {HomeScreen} from './pages/home/HomeScreen';
+// import {createStackNavigator} from '@react-navigation/stack';
+import HomeScreen from './pages/home/HomeScreen';
 import Login from './pages/login/Login';
-const Stack = createStackNavigator();
+import {createNativeStackNavigator} from 'react-native-screens/native-stack';
+const Stack = createNativeStackNavigator();
 
-const config = {
-  animation: 'spring',
-  config: {
-    stiffness: 1000,
-    damping: 500,
-    mass: 3,
-    overshootClamping: true,
-    restDisplacementThreshold: 0.01,
-    restSpeedThreshold: 0.01,
-  },
-};
+import {Platform, UIManager} from 'react-native';
+import {Provider} from 'react-redux';
+import store from './store/index';
+
+store.dispatch({
+  type: 'SET_THEME',
+  ThemeType: 'light',
+});
+
+if (Platform.OS === 'android') {
+  if (UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
+}
 
 class App extends React.Component {
   constructor(props) {
@@ -23,30 +27,28 @@ class App extends React.Component {
   }
   render() {
     return (
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{
-              title: '',
-              headerShown: false,
-              headerStatusBarHeight: 0,
-              animationEnabled: true,
-              gestureDirection: 'horizontal',
-            }}
-          />
-          <Stack.Screen
-            name="Login"
-            component={Login}
-            options={{
-              animationEnabled: true,
-              gestureEnabled: true,
-              gestureDirection: 'horizontal',
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Provider store={store}>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              stackAnimation: 'slide_from_right',
+              statusBarTranslucent: true,
+              statusBarStyle: 'dark',
+              statusBarColor: 'transparent',
+            }}>
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              options={{
+                title: '',
+                headerShown: false,
+                headerStatusBarHeight: 0,
+              }}
+            />
+            <Stack.Screen name="Login" component={Login} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
     );
   }
 }
