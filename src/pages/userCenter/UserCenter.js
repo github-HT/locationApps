@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 
 import {Avatar, ListItem, Button} from 'react-native-elements';
-import {Divider} from 'react-native-elements/dist/divider/Divider';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import {connect} from 'react-redux';
 
 export default connect(state => ({
