@@ -1,6 +1,6 @@
 @font-face {
   font-family: "iconfont"; /* Project id 2711780 */
-  src: url('iconfont.ttf?t=1627872307178') format('truetype');
+  src: url('iconfont.ttf?t=1627876819929') format('truetype');
 }
 
 .iconfont {
@@ -9,6 +9,10 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-tanhao:before {
+  content: "\e8bd";
 }
 
 .icon-anquan:before {
