@@ -5,7 +5,6 @@ import {
   PermissionsAndroid,
   StyleSheet,
   BackHandler,
-  Image,
   Text,
 } from 'react-native';
 
@@ -15,27 +14,18 @@ import {LocationMap} from '../map/LocationMap';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import UserCenter from '../userCenter/UserCenter';
 import {connect} from 'react-redux';
-import {SafeAreaView} from 'react-native-safe-area-context';
 const Tab = createBottomTabNavigator();
 
 const styles = StyleSheet.create({
   fullScreen: {
     flex: 1,
   },
-  // iconStyle: {
-  //   height: 30,
-  //   width: 30,
-  // },
-  iconStyle: {
-    fontFamily: 'iconfont',
-    fontSize: 30,
-    marginTop: 10,
-    marginLeft: 10,
-  },
 });
 
 export default connect(state => ({
   ActiveThemeContent: state.theme.ActiveThemeContent,
+  iconfont: state.styles.iconfont,
+  fontSize: state.styles.fontSize,
 }))(
   class HomeScreen extends React.Component {
     constructor(props) {
@@ -67,7 +57,7 @@ export default connect(state => ({
     };
 
     render() {
-      const {ActiveThemeContent} = this.props;
+      const {ActiveThemeContent, iconfont, fontSize} = this.props;
       return (
         <View style={styles.fullScreen}>
           <Tab.Navigator
@@ -84,8 +74,9 @@ export default connect(state => ({
                 return (
                   <Text
                     style={[
-                      styles.iconStyle,
-                      focused ? ActiveThemeContent.font.primary : {},
+                      iconfont.default,
+                      fontSize.xxxxlarge,
+                      focused ? ActiveThemeContent.fontColor.primary : {},
                     ]}>
                     {Icons[route.name]}
                   </Text>
