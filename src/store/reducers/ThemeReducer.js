@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {StyleSheet} from 'react-native';
 const ThemeContents = {
   light: {
-    font: StyleSheet.create({
+    fontColor: StyleSheet.create({
       primary: {
         color: '#8134fe',
       },
@@ -17,6 +17,15 @@ const ThemeContents = {
       body: {
         color: '#1C1C1C',
       },
+      body_2: {
+        color: '#4F4F4F',
+      },
+      body_3: {
+        color: '#696969',
+      },
+      body_4: {
+        color: '#B5B5B5',
+      },
     }),
     background: StyleSheet.create({
       default: {
@@ -28,11 +37,11 @@ const ThemeContents = {
       content: {
         backgroundColor: '#FFFFFF',
       },
-      content_level_2: {
+      level_2: {
         backgroundColor: '#d3d7d4',
       },
     }),
-    border: StyleSheet.create({
+    borderColor: StyleSheet.create({
       default: {
         borderColor: '#d3d7d4',
       },

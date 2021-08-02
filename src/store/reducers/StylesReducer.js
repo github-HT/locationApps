@@ -86,6 +86,71 @@ const StylesContents = {
       fontWeight: '700',
     },
   }),
+  fontSize: StyleSheet.create({
+    xxxxxxlarge: {
+      fontSize: 128,
+    },
+    xxxxxlarge: {
+      fontSize: 64,
+    },
+    xxxxlarge: {
+      fontSize: 32,
+    },
+    xxxlarge: {
+      fontSize: 24,
+    },
+    xxlarge: {
+      fontSize: 20,
+    },
+    xlarge: {
+      fontSize: 18,
+    },
+    large: {
+      fontSize: 16,
+    },
+    title: {
+      fontSize: 14,
+      fontWeight: '500',
+    },
+    subTitle: {
+      fontSize: 12,
+    },
+    body: {
+      fontSize: 14,
+    },
+    body_2: {
+      fontSize: 12,
+    },
+    body_3: {
+      fontSize: 10,
+    },
+    body_4: {
+      fontSize: 8,
+    },
+    body_5: {
+      fontSize: 6,
+    },
+  }),
+  iconfont: StyleSheet.create({
+    default: {
+      fontFamily: 'iconfont',
+      fontSize: 24,
+    },
+  }),
+  button: StyleSheet.create({
+    large: {
+      height: 48,
+      fontSize: 16,
+    },
+    medium: {
+      height: 40,
+      fontSize: 14,
+    },
+    small: {
+      height: 32,
+      fontSize: 12,
+    },
+  }),
 };
 
 export default function StylesReducer(state = StylesContents, action) {
