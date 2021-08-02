@@ -50,6 +50,9 @@ export default connect(state => ({
     toLogin = () => {
       this.props.navigation.push('Login', {});
     };
+    toUserInfo = () => {
+      this.props.navigation.push('UserInfo', {});
+    };
     componentDidMount() {}
 
     render() {
@@ -66,7 +69,10 @@ export default connect(state => ({
         <View style={[styles.fullScreen, background.default]}>
           <View style={[background.content, padding.pt_32]}>
             {/* <SafeAreaView style={padding.pb_0}> */}
-            <ListItem containerStyle={[padding.pa_24, padding.pt_24]}>
+            <ListItem
+              activeOpacity={0.97}
+              containerStyle={[padding.pa_24, padding.pt_24]}
+              onPress={this.toUserInfo}>
               <Avatar
                 size="medium"
                 rounded
@@ -89,12 +95,11 @@ export default connect(state => ({
           <View style={[styles.fullScreen, background.default, padding.py_12]}>
             {this.state.list.map((it, idx) => {
               return (
-                <View style={[idx !== 0 && padding.pt_12]}>
+                <View key={'View' + idx} style={[idx !== 0 && padding.pt_12]}>
                   {it.map((item, i) => (
                     <View key={i}>
                       <ListItem
                         containerStyle={[padding.pa_12, ...item.style]}
-                        key={i}
                         bottomDivider={i !== this.state.list.length - 1}>
                         <Avatar
                           rounded
