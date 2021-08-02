@@ -6,14 +6,6 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {connect} from 'react-redux';
 import Animateds from './children/Animateds';
 
-import fontJson from '../../assets/iconfont/iconfont.json';
-console.log(fontJson.glyphs);
-const iconObj = {};
-fontJson.glyphs.map(item => {
-  iconObj[item.font_class] = ('\\u' + item.unicode).substr(0);
-});
-console.log(iconObj);
-
 export default connect(state => ({
   ThemeType: state.ThemeReducer.ThemeType,
   ActiveThemeContent: state.ThemeReducer.ActiveThemeContent,
@@ -38,7 +30,6 @@ export default connect(state => ({
           centerComponent={{text: '用户中心', style: styles.headerCenterText}}
         /> */}
           <View style={styles.fullScreen}>
-            <Text style={styles.iconStyle}>{iconObj.home}</Text>
             <Button
               title="去登录"
               buttonStyle={ActiveThemeContent.background.primary}
