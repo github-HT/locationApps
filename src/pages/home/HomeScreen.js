@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
 });
 
 export default connect(state => ({
-  ActiveThemeContent: state.ThemeReducer.ActiveThemeContent,
+  ActiveThemeContent: state.theme.ActiveThemeContent,
 }))(
   class HomeScreen extends React.Component {
     constructor(props) {
