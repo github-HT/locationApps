@@ -75,14 +75,14 @@ export class LocationMap extends Component {
   render() {
     return (
       <View style={styles.fullScreen}>
-        <MapView
+        {/* <MapView
           ref={res => (this.mapViewRef = res)}
           style={styles.webviewStyle}
           locationEnabled
           showsLocationButton
           locationInterval={5000}
           onLocation={this.onLocation}
-        />
+        /> */}
         <ButtonContent locationConfig={this.state.locationConfig} />
       </View>
     );

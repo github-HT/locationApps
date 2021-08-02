@@ -14,6 +14,8 @@ import {LocationMap} from '../map/LocationMap';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import UserCenter from '../userCenter/UserCenter';
 import {connect} from 'react-redux';
+import RNBootSplash from 'react-native-bootsplash';
+
 const Tab = createBottomTabNavigator();
 
 const styles = StyleSheet.create({
@@ -38,6 +40,8 @@ export default connect(state => ({
           PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
         ]);
       }
+
+      RNBootSplash.hide({fade: true});
     }
 
     componentDidMount() {
