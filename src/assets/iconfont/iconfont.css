@@ -2,8 +2,8 @@
   font-family: "iconfont"; /* Project id 2711780 */
   /* Color fonts */
   src: 
-       url('iconfont.woff2?t=1627865377224') format('woff2'),
-       url('iconfont.ttf?t=1627865377224') format('truetype');
+       url('iconfont.woff2?t=1627869961492') format('woff2'),
+       url('iconfont.ttf?t=1627869961492') format('truetype');
 }
 
 .iconfont {
@@ -12,6 +12,62 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-icon-test:before {
+  content: "\e633";
+}
+
+.icon-icon-test1:before {
+  content: "\e634";
+}
+
+.icon-icon-test2:before {
+  content: "\e658";
+}
+
+.icon-icon-test3:before {
+  content: "\e659";
+}
+
+.icon-icon-test4:before {
+  content: "\e65a";
+}
+
+.icon-icon-test5:before {
+  content: "\e65b";
+}
+
+.icon-aixin:before {
+  content: "\e8ab";
+}
+
+.icon-fenxiang:before {
+  content: "\e8b1";
+}
+
+.icon-mima:before {
+  content: "\e8b2";
+}
+
+.icon-shanchu:before {
+  content: "\e8b6";
+}
+
+.icon-shouji:before {
+  content: "\e8ba";
+}
+
+.icon-sousuo:before {
+  content: "\e8bb";
+}
+
+.icon-xiangji:before {
+  content: "\e8bc";
+}
+
+.icon-zhiwen:before {
+  content: "\e8c2";
 }
 
 .icon-dingwei1:before {
