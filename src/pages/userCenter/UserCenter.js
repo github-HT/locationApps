@@ -1,43 +1,132 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 
-import {Button} from 'react-native-elements';
+import {Avatar, ListItem, Button} from 'react-native-elements';
+import {Divider} from 'react-native-elements/dist/divider/Divider';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {connect} from 'react-redux';
-import Animateds from './children/Animateds';
 
 export default connect(state => ({
-  ThemeType: state.ThemeReducer.ThemeType,
-  ActiveThemeContent: state.ThemeReducer.ActiveThemeContent,
+  ThemeType: state.theme.ThemeType,
+  ActiveThemeContent: state.theme.ActiveThemeContent,
+  padding: state.styles.padding,
+  margin: state.styles.margin,
+  fontSize: state.styles.fontSize,
+  iconfont: state.styles.iconfont,
+  fontWeight: state.styles.fontWeight,
+  button: state.styles.button,
 }))(
   class UserCenter extends Component {
+    constructor(props) {
+      super();
+      const {margin} = props;
+      this.state = {
+        list: [
+          [
+            {
+              title: '安全设置',
+              icon: '\ue8af',
+              style: [],
+            },
+            {
+              title: '通用设置',
+              icon: '\ue8b8',
+              style: [],
+            },
+          ],
+          [
+            {
+              title: '关于我们',
+              icon: '\ue8bd',
+              style: [margin.pt_12],
+            },
+            {
+              title: '分享应用',
+              icon: '\ue8b1',
+              style: [],
+            },
+          ],
+        ],
+      };
+    }
     toLogin = () => {
       this.props.navigation.push('Login', {});
     };
-    componentDidMount() {
-      console.log(this.props);
-    }
+    componentDidMount() {}
 
     render() {
-      const {ActiveThemeContent} = this.props;
-      console.log(ActiveThemeContent);
-      const {background} = ActiveThemeContent;
-      console.log(background.primary);
+      const {
+        ActiveThemeContent,
+        padding,
+        fontSize,
+        iconfont,
+        fontWeight,
+        button,
+      } = this.props;
+      const {background, fontColor} = ActiveThemeContent;
       return (
-        <SafeAreaView style={styles.fullScreen}>
-          {/* <Header
-          backgroundColor={'white'}
-          centerComponent={{text: '用户中心', style: styles.headerCenterText}}
-        /> */}
-          <View style={styles.fullScreen}>
-            <Button
-              title="去登录"
-              buttonStyle={ActiveThemeContent.background.primary}
-              onPress={this.toLogin}
-            />
-            <Animateds />
+        <View style={[styles.fullScreen, background.default]}>
+          <View style={[background.content, padding.pt_32]}>
+            {/* <SafeAreaView style={padding.pb_0}> */}
+            <ListItem containerStyle={[padding.pa_24, padding.pt_24]}>
+              <Avatar
+                size="medium"
+                rounded
+                title="H"
+                titleStyle={fontColor.primary}
+                overlayContainerStyle={background.level_2}
+              />
+              <ListItem.Content>
+                <ListItem.Title style={fontWeight.large}>HT</ListItem.Title>
+                <ListItem.Subtitle style={fontSize.subTitle}>
+                  一个很懒的程序猿！
+                </ListItem.Subtitle>
+              </ListItem.Content>
+              <Text style={[iconfont.default, fontColor.body_4]}>
+                {'\ue65b'}
+              </Text>
+            </ListItem>
+            {/* </SafeAreaView> */}
           </View>
-        </SafeAreaView>
+          <View style={[styles.fullScreen, background.default, padding.py_12]}>
+            {this.state.list.map((it, idx) => {
+              return (
+                <View style={[idx !== 0 && padding.pt_12]}>
+                  {it.map((item, i) => (
+                    <View key={i}>
+                      <ListItem
+                        containerStyle={[padding.pa_12, ...item.style]}
+                        key={i}
+                        bottomDivider={i !== this.state.list.length - 1}>
+                        <Avatar
+                          rounded
+                          title={item.icon}
+                          titleStyle={[fontColor.body, iconfont.default]}
+                        />
+                        <ListItem.Content>
+                          <ListItem.Title style={fontSize.title}>
+                            {item.title}
+                          </ListItem.Title>
+                        </ListItem.Content>
+                        <Text style={[iconfont.default, fontColor.body_4]}>
+                          {'\ue65b'}
+                        </Text>
+                      </ListItem>
+                    </View>
+                  ))}
+                </View>
+              );
+            })}
+            <View style={[padding.pa_12]}>
+              <Button
+                title="去登录"
+                titleStyle={fontSize.body}
+                buttonStyle={[background.primary, button.medium]}
+                onPress={this.toLogin}
+              />
+            </View>
+          </View>
+        </View>
       );
     }
   },
@@ -46,19 +135,5 @@ export default connect(state => ({
 const styles = StyleSheet.create({
   fullScreen: {
     flex: 1,
-  },
-  headerCenterText: {
-    fontSize: 17,
-    fontWeight: '600',
-  },
-  button: {
-    backgroundColor: 'red',
-    color: 'red',
-  },
-  iconStyle: {
-    fontFamily: 'iconfont',
-    fontSize: 24,
-    marginTop: 10,
-    marginLeft: 10,
   },
 });
