@@ -9,6 +9,7 @@ const Stack = createNativeStackNavigator();
 import {Platform, UIManager} from 'react-native';
 import {Provider} from 'react-redux';
 import store from './store/index';
+import UserInfo from './pages/userCenter/UserInfo';
 
 store.dispatch({
   type: 'SET_THEME',
@@ -46,6 +47,7 @@ class App extends React.Component {
               }}
             />
             <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="UserInfo" component={UserInfo} />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
