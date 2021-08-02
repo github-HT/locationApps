@@ -8,6 +8,14 @@ const ThemeContents = {
       },
       title: {
         color: 'black',
+        fontWeight: '600',
+      },
+      subtitle: {
+        color: '#363636',
+        fontWeight: '500',
+      },
+      body: {
+        color: '#1C1C1C',
       },
     }),
     background: StyleSheet.create({
@@ -19,6 +27,9 @@ const ThemeContents = {
       },
       content: {
         backgroundColor: '#FFFFFF',
+      },
+      content_level_2: {
+        backgroundColor: '#d3d7d4',
       },
     }),
     border: StyleSheet.create({
@@ -77,7 +88,7 @@ export default function ThemeReducer(state = ThemeState, action) {
   }
   switch (action.type) {
     case 'SET_THEME':
-      // AsyncStorage.setItem('localTheme', action.ThemeType);
+      AsyncStorage.setItem('localTheme', action.ThemeType);
       return Object.assign({}, state, {
         ActiveThemeContent: ThemeContents[action.ThemeType],
         ThemeType: action.ThemeType,
