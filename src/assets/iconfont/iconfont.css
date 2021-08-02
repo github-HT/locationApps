@@ -1,9 +1,6 @@
 @font-face {
   font-family: "iconfont"; /* Project id 2711780 */
-  /* Color fonts */
-  src: 
-       url('iconfont.woff2?t=1627869961492') format('woff2'),
-       url('iconfont.ttf?t=1627869961492') format('truetype');
+  src: url('iconfont.ttf?t=1627872307178') format('truetype');
 }
 
 .iconfont {
@@ -12,6 +9,18 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-anquan:before {
+  content: "\e8af";
+}
+
+.icon-saoyisao:before {
+  content: "\e8b5";
+}
+
+.icon-shezhi:before {
+  content: "\e8b8";
 }
 
 .icon-icon-test:before {
