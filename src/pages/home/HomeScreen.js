@@ -95,13 +95,13 @@ export default connect(state => ({
                 title: '首页',
               }}
             />
-            <Tab.Screen
+            {/* <Tab.Screen
               name="Discovery"
               component={DiscoveryScreen}
               options={{
                 title: '发现',
               }}
-            />
+            /> */}
             <Tab.Screen
               name="UserCenter"
               iconkey="home"
