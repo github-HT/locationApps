@@ -25,23 +25,35 @@ export default connect(state => ({
               title: '安全设置',
               icon: '\ue8af',
               style: [],
+              onclick: () => {
+                this.props.navigation.push('Security');
+              },
             },
             {
               title: '通用设置',
               icon: '\ue8b8',
               style: [],
+              onclick: () => {
+                this.props.navigation.push('OtherSetting');
+              },
             },
           ],
           [
             {
               title: '关于我们',
               icon: '\ue8bd',
-              style: [margin.pt_12],
+              style: [],
+              onclick: () => {
+                this.props.navigation.push('About');
+              },
             },
             {
               title: '分享应用',
               icon: '\ue8b1',
               style: [],
+              onclick: () => {
+                this.props.navigation.push('ShareApps');
+              },
             },
           ],
         ],
@@ -99,8 +111,9 @@ export default connect(state => ({
                   {it.map((item, i) => (
                     <View key={i}>
                       <ListItem
+                        activeOpacity={0.97}
                         containerStyle={[padding.pa_12, ...item.style]}
-                        bottomDivider={i !== this.state.list.length - 1}>
+                        onPress={item.onclick}>
                         <Avatar
                           rounded
                           title={item.icon}

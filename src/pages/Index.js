@@ -7,6 +7,10 @@ const Stack = createNativeStackNavigator();
 
 import UserInfo from './userCenter/UserInfo';
 import {connect} from 'react-redux';
+import About from './userCenter/About';
+import Security from './setting/security/Security';
+import OtherSetting from './setting/other/OtherSetting';
+import ShareApps from './userCenter/ShareApps';
 
 class Index extends React.Component {
   constructor(props) {
@@ -35,6 +39,10 @@ class Index extends React.Component {
           />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="UserInfo" component={UserInfo} />
+          <Stack.Screen name="About" component={About} />
+          <Stack.Screen name="Security" component={Security} />
+          <Stack.Screen name="OtherSetting" component={OtherSetting} />
+          <Stack.Screen name="ShareApps" component={ShareApps} />
         </Stack.Navigator>
       </NavigationContainer>
     );
