@@ -14,7 +14,7 @@
 		1FDF65EDC541F3C3B6420DE2 /* libPods-locationApps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BB7910ACABAF7C1343043CF /* libPods-locationApps.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		BA17152826B6B1ED003CDE23 /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA17152726B6B1ED003CDE23 /* iconfont.ttf */; };
-		BAF3394826B82C3200392100 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAF3394726B82C3200392100 /* BootSplash.storyboard */; };
+		BA1B7E9826B90D12007B7777 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA1B7E9A26B90D12007B7777 /* BootSplash.storyboard */; };
 		E0653E0F6D6F28DD3A83EE5F /* libPods-locationApps-locationAppsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E299571F5F395CA5A2B4FB27 /* libPods-locationApps-locationAppsTests.a */; };
 /* End PBXBuildFile section */
 
@@ -57,7 +57,7 @@
 		AF49085ADCF94A7291D34E14 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		AF9B728CEC7F4F89873C0A4B /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		BA17152726B6B1ED003CDE23 /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = iconfont.ttf; path = ../src/assets/iconfont/iconfont.ttf; sourceTree = "<group>"; };
-		BAF3394726B82C3200392100 /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = locationApps/BootSplash.storyboard; sourceTree = "<group>"; };
+		BA1B7E9926B90D12007B7777 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/BootSplash.storyboard; sourceTree = "<group>"; };
 		BC2B9ACE0C90453090C14D9F /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		C4EED687BF544F66A09F18A7 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		D37A1C9C8436482C96E6A5AE /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
@@ -106,7 +106,7 @@
 		13B07FAE1A68108700A75B9A /* locationApps */ = {
 			isa = PBXGroup;
 			children = (
-				BAF3394726B82C3200392100 /* BootSplash.storyboard */,
+				BA1B7E9A26B90D12007B7777 /* BootSplash.storyboard */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -291,7 +291,7 @@
 				BA17152826B6B1ED003CDE23 /* iconfont.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				BAF3394826B82C3200392100 /* BootSplash.storyboard in Resources */,
+				BA1B7E9826B90D12007B7777 /* BootSplash.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,6 +472,18 @@
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		BA1B7E9A26B90D12007B7777 /* BootSplash.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BA1B7E9926B90D12007B7777 /* Base */,
+			);
+			name = BootSplash.storyboard;
+			path = locationApps;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
