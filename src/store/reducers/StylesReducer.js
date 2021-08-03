@@ -68,6 +68,70 @@ const StylesContents = {
     xlarge: {
       borderRadius: 20,
     },
+    top_small: {
+      borderTopLeftRadius: 5,
+      borderTopRightRadius: 5,
+    },
+    top_medium: {
+      borderTopLeftRadius: 10,
+      borderTopRightRadius: 10,
+    },
+    top_large: {
+      borderTopLeftRadius: 15,
+      borderTopRightRadius: 15,
+    },
+    top_xlarge: {
+      borderTopLeftRadius: 20,
+      borderTopRightRadius: 20,
+    },
+    bottom_small: {
+      borderBottomLeftRadius: 5,
+      borderBottomRightRadius: 5,
+    },
+    bottom_medium: {
+      borderBottomLeftRadius: 10,
+      borderBottomRightRadius: 10,
+    },
+    bottom_large: {
+      borderBottomLeftRadius: 15,
+      borderBottomRightRadius: 15,
+    },
+    bottom_xlarge: {
+      borderBottomLeftRadius: 20,
+      borderBottomRightRadius: 20,
+    },
+    left_small: {
+      borderTopLeftRadius: 5,
+      borderBottomLeftRadius: 5,
+    },
+    left_medium: {
+      borderTopLeftRadius: 10,
+      borderBottomLeftRadius: 10,
+    },
+    left_large: {
+      borderTopLeftRadius: 15,
+      borderBottomLeftRadius: 15,
+    },
+    left_xlarge: {
+      borderTopLeftRadius: 20,
+      borderBottomLeftRadius: 20,
+    },
+    right_small: {
+      borderTopRightRadius: 5,
+      borderBottomRightRadius: 5,
+    },
+    right_medium: {
+      borderTopRightRadius: 10,
+      borderBottomRightRadius: 10,
+    },
+    right_large: {
+      borderTopRightRadius: 15,
+      borderBottomRightRadius: 15,
+    },
+    right_xlarge: {
+      borderTopRightRadius: 20,
+      borderBottomRightRadius: 20,
+    },
   }),
   fontWeight: StyleSheet.create({
     default: {
