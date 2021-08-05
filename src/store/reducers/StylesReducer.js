@@ -215,6 +215,11 @@ const StylesContents = {
       fontSize: 12,
     },
   }),
+  otherStyles: StyleSheet.create({
+    fillContent: {
+      flex: 1,
+    },
+  }),
 };
 
 export default function StylesReducer(state = StylesContents, action) {
