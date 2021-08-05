@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 
 import BackHome from '../../components/BackHome';
-import {DiscoveryScreen} from '../discovery/DiscoveryScreen';
 import {LocationMap} from '../map/LocationMap';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import UserCenter from '../userCenter/UserCenter';
