@@ -1,12 +1,10 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Link} from '@react-navigation/native';
+import QueryString from 'qs';
 import React, {Component} from 'react';
-import {Text, BackHandler, View} from 'react-native';
+import {Text, BackHandler} from 'react-native';
 import {Input, Button} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {connect} from 'react-redux';
-import qs from 'qs';
 import CryptoJS from 'crypto-js';
 
 export default connect(state => ({
@@ -16,7 +14,7 @@ export default connect(state => ({
   otherStyles: state.styles.otherStyles,
   fontSize: state.styles.fontSize,
 }))(
-  class Login extends Component {
+  class Register extends Component {
     constructor() {
       super();
       this.state = {
@@ -24,6 +22,9 @@ export default connect(state => ({
           value: '',
         },
         password: {
+          value: '',
+        },
+        confirmPassword: {
           value: '',
         },
       };
@@ -44,44 +45,30 @@ export default connect(state => ({
       return true;
     };
 
-    toDiscovery = () => {
-      this.props.navigation.navigate({name: 'LocationMap', params: {}});
-    };
+    doRegister = () => {
+      console.log(
+        'do Register',
+        this.state.userName,
+        this.state.password,
+        this.state.confirmPassword,
+      );
 
-    doLogin = () => {
-      console.log('do Lodin', this.state.userName, this.state.password);
-
-      const body = qs.stringify({
+      const body = QueryString.stringify({
         userName: this.state.userName.value,
         password: CryptoJS.MD5(this.state.password.value).toString(),
       });
-      console.log(body, typeof body);
 
-      // let formData = new FormData();
-      // formData.append('name', '张三');
-      // formData.append('age', 18);
-      fetch('http://localhost:3000/users/login', {
+      fetch('http://localhost:3000/users/register', {
         method: 'POST',
         headers: {},
-        body: body,
+        body,
       })
         .then(response => response.json())
-        .then(res => {
-          const data = res;
-          console.log('users/login', data);
-          fetch('http://localhost:3000/users/userinfo', {
-            method: 'GET',
-            headers: {
-              Authorization: 'Bearer ' + data.token,
-            },
-          })
-            .then(response => response.json())
-            .then(ret => {
-              console.log('getuserinfo', ret);
-            })
-            .catch(err => {
-              console.log('/users/userinfo', err);
-            });
+        .then(ret => {
+          console.log('register', ret);
+        })
+        .catch(err => {
+          console.error('/users/register error', err);
         });
     };
 
@@ -102,13 +89,20 @@ export default connect(state => ({
       });
     };
 
+    setConfirmPassword = e => {
+      this.setState({
+        password: {
+          value: e,
+        },
+      });
+    };
+
     render() {
-      const {background, otherStyles, fontColor, fontSize, padding} =
-        this.props;
+      const {background, otherStyles, fontColor, fontSize} = this.props;
       return (
         <SafeAreaView style={[background.content, otherStyles.fillContent]}>
           <ScrollView>
-            <Text style={[fontColor.title, fontSize.xxlarge]}> 登录 </Text>
+            <Text style={[fontColor.title, fontSize.xxlarge]}> 注册 </Text>
 
             <Input
               placeholder="账号"
@@ -122,10 +116,13 @@ export default connect(state => ({
               secureTextEntry={true}
               onChangeText={this.setPassword}
             />
-            <Link to={'/Register'}>去注册</Link>
-            <View style={[padding.pt_32]}>
-              <Button title="登录" onPress={this.doLogin} />
-            </View>
+            <Input
+              placeholder="确认密码"
+              keyboardType="default"
+              secureTextEntry={true}
+              onChangeText={this.setConfirmPassword}
+            />
+            <Button title="提交" onPress={this.doRegister} />
           </ScrollView>
         </SafeAreaView>
       );

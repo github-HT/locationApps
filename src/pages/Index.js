@@ -12,6 +12,8 @@ import Security from './setting/security/Security';
 import OtherSetting from './setting/other/OtherSetting';
 import ShareApps from './userCenter/ShareApps';
 
+import Register from './login/Register';
+
 class Index extends React.Component {
   constructor(props) {
     super(props);
@@ -37,7 +39,20 @@ class Index extends React.Component {
               headerStatusBarHeight: 0,
             }}
           />
-          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={Register}
+            options={{
+              headerShown: false,
+            }}
+          />
           <Stack.Screen name="UserInfo" component={UserInfo} />
           <Stack.Screen name="About" component={About} />
           <Stack.Screen name="Security" component={Security} />
