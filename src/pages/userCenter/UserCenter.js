@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, Alert} from 'react-native';
 
 import {Avatar, ListItem, Button} from 'react-native-elements';
 import {connect} from 'react-redux';
+import {LogOut} from '../../models/userModel';
 
 export default connect(state => ({
   ThemeType: state.theme.ThemeType,
@@ -19,7 +20,6 @@ export default connect(state => ({
   class UserCenter extends Component {
     constructor(props) {
       super();
-      const {margin} = props;
       this.state = {
         list: [
           [
@@ -28,6 +28,10 @@ export default connect(state => ({
               icon: '\ue8af',
               style: [],
               onclick: () => {
+                if (!this.props.isLogin) {
+                  this.toLogin();
+                  return;
+                }
                 this.props.navigation.push('Security');
               },
             },
@@ -65,11 +69,16 @@ export default connect(state => ({
       this.props.navigation.push('Login', {});
     };
     toUserInfo = () => {
+      if (!this.props.isLogin) {
+        this.toLogin();
+        return;
+      }
       this.props.navigation.push('UserInfo', {});
     };
 
     doLogout = () => {
-      console.log('logout');
+      Alert.alert('退出', '退出登录啦！');
+      LogOut();
     };
     componentDidMount() {}
 
@@ -100,14 +109,22 @@ export default connect(state => ({
                 titleStyle={fontColor.primary}
                 overlayContainerStyle={background.level_2}
               />
-              <ListItem.Content>
-                <ListItem.Title style={fontWeight.large}>
-                  {userInfo.userName}
-                </ListItem.Title>
-                <ListItem.Subtitle style={fontSize.subTitle}>
-                  一个很懒的程序猿！
-                </ListItem.Subtitle>
-              </ListItem.Content>
+              {isLogin ? (
+                <ListItem.Content>
+                  <ListItem.Title style={fontWeight.large}>
+                    {userInfo.userName}
+                  </ListItem.Title>
+                  <ListItem.Subtitle style={fontSize.subTitle}>
+                    UID:{userInfo.uid}
+                  </ListItem.Subtitle>
+                </ListItem.Content>
+              ) : (
+                <ListItem.Content>
+                  <ListItem.Title style={fontWeight.large}>
+                    未登录
+                  </ListItem.Title>
+                </ListItem.Content>
+              )}
               <Text style={[iconfont.default, fontColor.body_4]}>
                 {'\ue65b'}
               </Text>
