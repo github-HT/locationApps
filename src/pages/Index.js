@@ -44,6 +44,7 @@ class Index extends React.Component {
             component={Login}
             options={{
               headerShown: false,
+              title: '登录',
             }}
           />
           <Stack.Screen
