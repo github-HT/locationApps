@@ -64,7 +64,7 @@ const ThemeContents = {
         fontWeight: '500',
       },
       body: {
-        color: '#1C1C1C',
+        color: '#fcfcfc',
       },
       body_2: {
         color: '#4F4F4F',
