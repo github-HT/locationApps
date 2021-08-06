@@ -10,12 +10,12 @@ import {
 
 import BackHome from '../../models/BackHome';
 import {LocationMap} from '../map/LocationMap';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import UserCenter from '../userCenter/UserCenter';
 import {connect} from 'react-redux';
 import RNBootSplash from 'react-native-bootsplash';
 
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
 const styles = StyleSheet.create({
   fullScreen: {
@@ -27,6 +27,7 @@ export default connect(state => ({
   ActiveThemeContent: state.theme.ActiveThemeContent,
   iconfont: state.styles.iconfont,
   fontSize: state.styles.fontSize,
+  otherStyles: state.styles.otherStyles,
 }))(
   class HomeScreen extends React.Component {
     constructor(props) {
@@ -60,57 +61,56 @@ export default connect(state => ({
     };
 
     render() {
-      const {ActiveThemeContent, iconfont, fontSize} = this.props;
+      const {ActiveThemeContent, iconfont, fontSize, otherStyles} = this.props;
+      const {background, fontColor} = ActiveThemeContent;
       return (
-        <View style={styles.fullScreen}>
-          <Tab.Navigator
-            tabBarOptions={{
-              showLabel: false,
+        <Tab.Navigator
+          initialRouteName="LocationMap"
+          labeled={false}
+          screenOptions={({route}) => ({
+            tabBarIcon: ({color, size, focused}) => {
+              const Icons = {
+                LocationMap: '\ue8ae', //require('../../assets/img/location.png'),
+                Discovery: '\ue8b9', //require('../../assets/img/home.png'),
+                UserCenter: '\ue7ae', //require('../../assets/img/user.png'),
+              };
+              return (
+                <Text
+                  style={[
+                    iconfont.default,
+                    fontSize.xxxxlarge,
+                    focused ? fontColor.primary : fontColor.body,
+                  ]}>
+                  {Icons[route.name]}
+                </Text>
+              );
+            },
+          })}
+          barStyle={background.content}>
+          <Tab.Screen
+            name="LocationMap"
+            iconkey="home"
+            component={LocationMap}
+            options={{
+              title: '首页',
             }}
-            screenOptions={({route}) => ({
-              tabBarIcon: ({color, size, focused}) => {
-                const Icons = {
-                  LocationMap: '\ue8ae', //require('../../assets/img/location.png'),
-                  Discovery: '\ue8b9', //require('../../assets/img/home.png'),
-                  UserCenter: '\ue7ae', //require('../../assets/img/user.png'),
-                };
-                return (
-                  <Text
-                    style={[
-                      iconfont.default,
-                      fontSize.xxxxlarge,
-                      focused ? ActiveThemeContent.fontColor.primary : {},
-                    ]}>
-                    {Icons[route.name]}
-                  </Text>
-                );
-              },
-            })}>
-            <Tab.Screen
-              name="LocationMap"
-              iconkey="home"
-              component={LocationMap}
-              options={{
-                title: '首页',
-              }}
-            />
-            {/* <Tab.Screen
+          />
+          {/* <Tab.Screen
               name="Discovery"
               component={DiscoveryScreen}
               options={{
                 title: '发现',
               }}
             /> */}
-            <Tab.Screen
-              name="UserCenter"
-              iconkey="home"
-              component={UserCenter}
-              options={{
-                title: '我的',
-              }}
-            />
-          </Tab.Navigator>
-        </View>
+          <Tab.Screen
+            name="UserCenter"
+            iconkey="home"
+            component={UserCenter}
+            options={{
+              title: '我的',
+            }}
+          />
+        </Tab.Navigator>
       );
     }
   },
