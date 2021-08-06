@@ -1,14 +1,15 @@
 import {Link} from '@react-navigation/native';
 import React, {Component} from 'react';
 import {Text, BackHandler, View} from 'react-native';
-import {Input, Button, Header} from 'react-native-elements';
+import {Input, Button} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {connect} from 'react-redux';
 import CryptoJS from 'crypto-js';
 import {doLogin} from '../../api/api';
 import {setUserInfo} from '../../models/userModel';
-import {fonts} from 'react-native-elements/dist/config';
+import CHeader from '../../components/CHeader';
+import {Header} from 'react-native-elements/dist/header/Header';
 
 export default connect(state => ({
   background: state.theme.ActiveThemeContent.background,
@@ -97,21 +98,8 @@ export default connect(state => ({
         button,
       } = this.props;
       return (
-        <SafeAreaView style={[background.content, otherStyles.fillContent]}>
-          <Header
-            backgroundColor="transparent"
-            leftComponent={
-              <Text
-                onPress={this.backAction}
-                style={[iconfont.default, fontSize.xxxxlarge]}>
-                {'\ue659'}
-              </Text>
-            }
-            centerComponent={
-              <Text style={[fontColor.title, fontSize.xxxlarge]}>登录</Text>
-            }
-            centerContainerStyle={otherStyles.justifyContentCenter}
-          />
+        <View style={[background.content, otherStyles.fillContent]}>
+          <CHeader title="登录" />
           <ScrollView>
             <Input
               containerStyle={padding.pa_16}
@@ -153,7 +141,7 @@ export default connect(state => ({
               />
             </View>
           </ScrollView>
-        </SafeAreaView>
+        </View>
       );
     }
   },

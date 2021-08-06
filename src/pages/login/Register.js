@@ -1,12 +1,10 @@
-import QueryString from 'qs';
 import React, {Component} from 'react';
-import {View, Text, BackHandler, Alert} from 'react-native';
-import {Input, Button, Header} from 'react-native-elements';
+import {View, BackHandler, Alert} from 'react-native';
+import {Input, Button} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import {connect} from 'react-redux';
-import CryptoJS from 'crypto-js';
 import {doRegister} from '../../api/api';
+import CHeader from '../../components/CHeader';
 
 export default connect(state => ({
   background: state.theme.ActiveThemeContent.background,
@@ -77,24 +75,6 @@ export default connect(state => ({
         .catch(err => {
           console.log('doRegister err', err);
         });
-
-      // const body = QueryString.stringify({
-      //   userName: this.state.userName.value,
-      //   password: CryptoJS.MD5(this.state.password.value).toString(),
-      // });
-
-      // fetch('http://localhost:3000/users/register', {
-      //   method: 'POST',
-      //   headers: {},
-      //   body,
-      // })
-      //   .then(response => response.json())
-      //   .then(ret => {
-      //     console.log('register', ret);
-      //   })
-      //   .catch(err => {
-      //     console.error('/users/register error', err);
-      //   });
     };
 
     setUserName = e => {
@@ -133,21 +113,8 @@ export default connect(state => ({
         button,
       } = this.props;
       return (
-        <SafeAreaView style={[background.content, otherStyles.fillContent]}>
-          <Header
-            backgroundColor="transparent"
-            leftComponent={
-              <Text
-                onPress={this.backAction}
-                style={[iconfont.default, fontSize.xxxxlarge]}>
-                {'\ue659'}
-              </Text>
-            }
-            centerComponent={
-              <Text style={[fontColor.title, fontSize.xxxlarge]}>注册</Text>
-            }
-            centerContainerStyle={otherStyles.justifyContentCenter}
-          />
+        <View style={[background.content, otherStyles.fillContent]}>
+          <CHeader title="注册" />
           <ScrollView>
             <Input
               containerStyle={padding.pa_16}
@@ -190,7 +157,7 @@ export default connect(state => ({
               />
             </View>
           </ScrollView>
-        </SafeAreaView>
+        </View>
       );
     }
   },
