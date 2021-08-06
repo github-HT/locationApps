@@ -29,6 +29,7 @@ class Index extends React.Component {
             statusBarColor: 'transparent',
             headerHideShadow: true,
             headerBackTitleVisible: false,
+            headerShown: false,
           }}>
           <Stack.Screen
             name="Home"
