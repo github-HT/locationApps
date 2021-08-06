@@ -8,7 +8,7 @@ import {
   Text,
 } from 'react-native';
 
-import BackHome from '../../components/BackHome';
+import BackHome from '../../models/BackHome';
 import {LocationMap} from '../map/LocationMap';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import UserCenter from '../userCenter/UserCenter';
