@@ -100,7 +100,11 @@ export default connect(state => ({
             {/* <SafeAreaView style={padding.pb_0}> */}
             <ListItem
               activeOpacity={0.97}
-              containerStyle={[padding.pa_24, padding.pt_24]}
+              containerStyle={[
+                padding.pa_24,
+                padding.pt_24,
+                background.content,
+              ]}
               onPress={this.toUserInfo}>
               <Avatar
                 size="medium"
@@ -111,16 +115,17 @@ export default connect(state => ({
               />
               {isLogin ? (
                 <ListItem.Content>
-                  <ListItem.Title style={fontWeight.large}>
+                  <ListItem.Title style={[fontWeight.large, fontColor.title]}>
                     {userInfo.userName}
                   </ListItem.Title>
-                  <ListItem.Subtitle style={fontSize.subTitle}>
+                  <ListItem.Subtitle
+                    style={[fontSize.subTitle, fontColor.title]}>
                     UID:{userInfo.uid}
                   </ListItem.Subtitle>
                 </ListItem.Content>
               ) : (
                 <ListItem.Content>
-                  <ListItem.Title style={fontWeight.large}>
+                  <ListItem.Title style={[fontWeight.large, fontColor.title]}>
                     未登录
                   </ListItem.Title>
                 </ListItem.Content>
@@ -139,15 +144,24 @@ export default connect(state => ({
                     <View key={i}>
                       <ListItem
                         activeOpacity={0.97}
-                        containerStyle={[padding.pa_12, ...item.style]}
+                        containerStyle={[
+                          padding.pa_12,
+                          background.content,
+                          ...item.style,
+                        ]}
                         onPress={item.onclick}>
                         <Avatar
                           rounded
                           title={item.icon}
-                          titleStyle={[fontColor.body, iconfont.default]}
+                          titleStyle={[
+                            fontColor.body,
+                            iconfont.default,
+                            fontColor.title,
+                          ]}
                         />
                         <ListItem.Content>
-                          <ListItem.Title style={fontSize.title}>
+                          <ListItem.Title
+                            style={[fontSize.title, fontColor.title]}>
                             {item.title}
                           </ListItem.Title>
                         </ListItem.Content>

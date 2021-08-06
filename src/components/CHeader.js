@@ -10,6 +10,7 @@ export default connect(state => ({
   fontSize: state.styles.fontSize,
   margin: state.styles.margin,
   fontColor: state.theme.ActiveThemeContent.fontColor,
+  background: state.theme.ActiveThemeContent.background,
 }))(
   /**
    * 定制header
@@ -32,13 +33,16 @@ export default connect(state => ({
     fontSize,
     margin,
     fontColor,
+    background,
   }) {
     const navigation = useNavigation();
     function goBack() {
       navigation.goBack();
     }
     return (
-      <SafeAreaView edges={['top', 'left', 'right']}>
+      <SafeAreaView
+        edges={['top', 'left', 'right']}
+        style={[background.content]}>
         <View style={[styles.header, headerStyle]}>
           {headerLeft ? (
             headerLeft
@@ -54,7 +58,12 @@ export default connect(state => ({
                       : {},
                   ]}>
                   <Text
-                    style={[iconfont.default, fontSize.xxxxlarge, margin.ml_8]}>
+                    style={[
+                      iconfont.default,
+                      fontSize.xxxxlarge,
+                      margin.ml_8,
+                      fontColor.title,
+                    ]}>
                     {'\ue659'}
                   </Text>
                 </View>
