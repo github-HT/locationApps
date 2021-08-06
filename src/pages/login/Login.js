@@ -1,4 +1,3 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Link} from '@react-navigation/native';
 import React, {Component} from 'react';
 import {Text, BackHandler, View} from 'react-native';
@@ -6,9 +5,9 @@ import {Input, Button} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {connect} from 'react-redux';
-import qs from 'qs';
 import CryptoJS from 'crypto-js';
-import {Login as doLogin, UserInfo} from '../../api/api';
+import {doLogin} from '../../api/api';
+import {setUserInfo} from '../../models/userModel';
 
 export default connect(state => ({
   background: state.theme.ActiveThemeContent.background,
@@ -58,10 +57,11 @@ export default connect(state => ({
       };
       const res = await doLogin(data);
       if (res && res.data && res.data.code === 0) {
-        this.props.dispatch({
-          type: 'LOGIN',
-          userInfo: res.data.userInfo,
-        });
+        // this.props.dispatch({
+        //   type: 'SET_USER_INFO',
+        //   userInfo: res.data.userInfo,
+        // });
+        setUserInfo(res.data.userInfo);
         if (this.props.isLogin) {
           this.props.navigation.goBack();
         }
