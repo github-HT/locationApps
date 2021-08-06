@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">locationApps</string>
+    <string name="app_name">在这儿</string>
     <string name="appwidget_text">locationAppsWidget</string>
     <string name="add_widget">Add widget</string>
 </resources>
