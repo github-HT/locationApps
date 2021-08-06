@@ -3,15 +3,19 @@ const paddingArray = [0, 4, 8, 12, 16, 20, 24, 28, 32, 64, 128];
 const padding = {};
 paddingArray.forEach(item => {
   padding['pa_' + item] = {
+    paddingHorizontal: item,
+    paddingVertical: item,
     padding: item,
   };
   padding['px_' + item] = {
+    paddingHorizontal: item,
     paddingLeft: item,
     paddingRight: item,
   };
   padding['py_' + item] = {
     paddingTop: item,
     paddingBottom: item,
+    paddingVertical: item,
   };
   padding['pt_' + item] = {
     paddingTop: item,
@@ -218,6 +222,24 @@ const StylesContents = {
   otherStyles: StyleSheet.create({
     fillContent: {
       flex: 1,
+    },
+    justifyContentCenter: {
+      justifyContent: 'center',
+    },
+    justifyContentStart: {
+      justifyContent: 'flex-start',
+    },
+    justifyContentEnd: {
+      justifyContent: 'flex-end',
+    },
+    alignItemsCenter: {
+      alignItems: 'center',
+    },
+    alignItemsStart: {
+      alignItems: 'flex-start',
+    },
+    alignItemsEnd: {
+      alignItems: 'flex-end',
     },
   }),
 };
