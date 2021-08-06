@@ -51,18 +51,29 @@ const ThemeContents = {
     }),
   },
   dark: {
-    font: StyleSheet.create({
+    fontColor: StyleSheet.create({
       primary: {
         color: '#8134fe',
       },
       title: {
         color: 'white',
+        fontWeight: '600',
       },
-      subTitle: {
-        color: '#d3d7d4',
+      subtitle: {
+        color: '#363636',
+        fontWeight: '500',
       },
       body: {
-        color: 'white',
+        color: '#1C1C1C',
+      },
+      body_2: {
+        color: '#4F4F4F',
+      },
+      body_3: {
+        color: '#696969',
+      },
+      body_4: {
+        color: '#B5B5B5',
       },
     }),
     background: StyleSheet.create({
@@ -73,12 +84,15 @@ const ThemeContents = {
         backgroundColor: '#8134fe',
       },
       content: {
-        backgroundColor: '#1b315e',
+        backgroundColor: '#000000',
+      },
+      level_2: {
+        backgroundColor: '#000000',
       },
     }),
-    border: StyleSheet.create({
+    borderColor: StyleSheet.create({
       default: {
-        borderColor: '#3e4145',
+        borderColor: '#d3d7d4',
       },
       primary: {
         borderColor: '#8134fe',
