@@ -59,14 +59,8 @@ export default connect(state => ({
       };
       const res = await doLogin(data);
       if (res && res.data && res.data.code === 0) {
-        // this.props.dispatch({
-        //   type: 'SET_USER_INFO',
-        //   userInfo: res.data.userInfo,
-        // });
         setUserInfo(res.data.userInfo);
-        if (this.props.isLogin) {
-          this.props.navigation.goBack();
-        }
+        this.props.navigation.goBack();
       }
     };
 
