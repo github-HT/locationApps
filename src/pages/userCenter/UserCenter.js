@@ -119,7 +119,7 @@ export default connect(state => ({
                     {userInfo.userName}
                   </ListItem.Title>
                   <ListItem.Subtitle
-                    style={[fontSize.subTitle, fontColor.title]}>
+                    style={[fontSize.subTitle, fontColor.subtitle]}>
                     UID:{userInfo.uid}
                   </ListItem.Subtitle>
                 </ListItem.Content>
