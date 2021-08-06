@@ -1,5 +1,5 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {StyleSheet} from 'react-native';
+import {UtilStorage} from '../../utils/utils';
 const ThemeContents = {
   light: {
     fontColor: StyleSheet.create({
@@ -97,7 +97,7 @@ export default function ThemeReducer(state = ThemeState, action) {
   }
   switch (action.type) {
     case 'SET_THEME':
-      AsyncStorage.setItem('localTheme', action.ThemeType);
+      UtilStorage.setItem('localTheme', action.ThemeType);
       return Object.assign({}, state, {
         ActiveThemeContent: ThemeContents[action.ThemeType],
         ThemeType: action.ThemeType,

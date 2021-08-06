@@ -1,5 +1,6 @@
 import axios from 'axios';
 import QueryString from 'qs';
+import {UtilStorage} from '../utils/utils';
 
 export class Request {
   instance = null;
@@ -47,6 +48,7 @@ export class Request {
 
 export class RequestAddToken extends Request {
   token = null;
+
   addInterceptor() {
     // Add a request interceptor
     const self = this;
@@ -74,6 +76,7 @@ export class RequestAddToken extends Request {
         const data = response.data;
         if (data.token) {
           self.token = data.token;
+          UtilStorage.setItem('signToken', data.token);
         }
         return response;
       },
@@ -82,5 +85,19 @@ export class RequestAddToken extends Request {
         return Promise.reject(error);
       },
     );
+  }
+
+  LogOut() {
+    this.token = null;
+    UtilStorage.removeItem('signToken');
+  }
+
+  async getLocalToken() {
+    try {
+      const res = await UtilStorage.getItem('signToken');
+      console.log('getLocalToken', res);
+    } catch (error) {
+      console.log('try catch err', error);
+    }
   }
 }

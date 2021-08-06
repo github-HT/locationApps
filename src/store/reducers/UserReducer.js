@@ -1,7 +1,3 @@
-import QueryString from 'qs';
-import CryptoJS from 'crypto-js';
-import {Login} from '../../api/api';
-
 const UserState = {
   isLogin: false,
   userInfo: {
@@ -16,14 +12,16 @@ const UserState = {
 
 export default function UserReducer(state = UserState, action) {
   switch (action.type) {
-    case 'LOGIN':
-      return doLogin(state, action);
+    case 'SET_USER_INFO':
+      return setUserInfo(state, action);
+    case 'CLEAR_USER_INFO':
+      return clearUserInfo(state, action);
     default:
       return state;
   }
 }
 
-function doLogin(state, {userInfo}) {
+function setUserInfo(state, {userInfo}) {
   return Object.assign({}, state, {
     isLogin: true,
     userInfo: {
@@ -33,6 +31,19 @@ function doLogin(state, {userInfo}) {
       tm: userInfo.tm,
       uid: userInfo.uid,
       userName: userInfo.userName,
+    },
+  });
+}
+function clearUserInfo(state, action) {
+  return Object.assign({}, state, {
+    isLogin: false,
+    userInfo: {
+      age: '',
+      name: '',
+      sex: '',
+      tm: 0,
+      uid: 0,
+      userName: '',
     },
   });
 }
