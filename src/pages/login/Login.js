@@ -1,22 +1,23 @@
 import {Link} from '@react-navigation/native';
 import React, {Component} from 'react';
 import {Text, BackHandler, View} from 'react-native';
-import {Input, Button} from 'react-native-elements';
+import {Input, Button, Header} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {connect} from 'react-redux';
 import CryptoJS from 'crypto-js';
 import {doLogin} from '../../api/api';
 import {setUserInfo} from '../../models/userModel';
+import {fonts} from 'react-native-elements/dist/config';
 
 export default connect(state => ({
   background: state.theme.ActiveThemeContent.background,
-  fontColor: state.theme.ActiveThemeContent.background,
+  fontColor: state.theme.ActiveThemeContent.fontColor,
   padding: state.styles.padding,
   otherStyles: state.styles.otherStyles,
   fontSize: state.styles.fontSize,
-  isLogin: state.user.isLogin,
-  userInfo: state.user.userInfo,
+  iconfont: state.styles.iconfont,
+  button: state.styles.button,
 }))(
   class Login extends Component {
     constructor() {
@@ -92,31 +93,64 @@ export default connect(state => ({
         fontColor,
         fontSize,
         padding,
-        isLogin,
-        userInfo,
+        iconfont,
+        button,
       } = this.props;
       return (
         <SafeAreaView style={[background.content, otherStyles.fillContent]}>
+          <Header
+            backgroundColor="transparent"
+            leftComponent={
+              <Text
+                onPress={this.backAction}
+                style={[iconfont.default, fontSize.xxxxlarge]}>
+                {'\ue659'}
+              </Text>
+            }
+            centerComponent={
+              <Text style={[fontColor.title, fontSize.xxxlarge]}>登录</Text>
+            }
+            centerContainerStyle={otherStyles.justifyContentCenter}
+          />
           <ScrollView>
-            <Text style={[fontColor.title, fontSize.xxlarge]}>
-              登录 {isLogin ? 'login' : 'no'}
-            </Text>
-
             <Input
-              placeholder="账号"
+              containerStyle={padding.pa_16}
+              label="账号"
+              labelStyle={[fontColor.title]}
+              placeholder="请输入您的账号"
+              placeholderTextColor={fontColor.body_3.color}
               keyboardType="email-address"
               onChangeText={this.setUserName}
             />
 
             <Input
-              placeholder="密码"
+              containerStyle={padding.pa_16}
+              label="密码"
+              labelStyle={[fontColor.title]}
+              placeholder="请输入密码"
+              placeholderTextColor={fontColor.body_3.color}
               keyboardType="default"
               secureTextEntry={true}
               onChangeText={this.setPassword}
             />
-            <Link to={'/Register'}>去注册</Link>
-            <View style={[padding.pt_32]}>
-              <Button title="登录" onPress={this.doLogin} />
+            <View
+              style={[
+                padding.pa_16,
+                otherStyles.alignItemsEnd,
+                fontColor.primary,
+              ]}>
+              <Link style={[fontColor.primary]} to={'/Register'}>
+                没有账号？去注册吧
+              </Link>
+            </View>
+
+            <View style={[padding.pa_16]}>
+              <Button
+                title="登录"
+                titleStyle={[fontSize.large]}
+                buttonStyle={[background.primary, button.large]}
+                onPress={this.doLogin}
+              />
             </View>
           </ScrollView>
         </SafeAreaView>
