@@ -13,6 +13,8 @@ export default connect(state => ({
   iconfont: state.styles.iconfont,
   fontWeight: state.styles.fontWeight,
   button: state.styles.button,
+  isLogin: state.user.isLogin,
+  userInfo: state.user.userInfo,
 }))(
   class UserCenter extends Component {
     constructor(props) {
@@ -65,6 +67,10 @@ export default connect(state => ({
     toUserInfo = () => {
       this.props.navigation.push('UserInfo', {});
     };
+
+    doLogout = () => {
+      console.log('logout');
+    };
     componentDidMount() {}
 
     render() {
@@ -75,6 +81,8 @@ export default connect(state => ({
         iconfont,
         fontWeight,
         button,
+        isLogin,
+        userInfo,
       } = this.props;
       const {background, fontColor} = ActiveThemeContent;
       return (
@@ -93,7 +101,9 @@ export default connect(state => ({
                 overlayContainerStyle={background.level_2}
               />
               <ListItem.Content>
-                <ListItem.Title style={fontWeight.large}>HT</ListItem.Title>
+                <ListItem.Title style={fontWeight.large}>
+                  {userInfo.userName}
+                </ListItem.Title>
                 <ListItem.Subtitle style={fontSize.subTitle}>
                   一个很懒的程序猿！
                 </ListItem.Subtitle>
@@ -134,12 +144,21 @@ export default connect(state => ({
               );
             })}
             <View style={[padding.pa_12]}>
-              <Button
-                title="去登录"
-                titleStyle={fontSize.body}
-                buttonStyle={[background.primary, button.medium]}
-                onPress={this.toLogin}
-              />
+              {isLogin ? (
+                <Button
+                  title="退出登录"
+                  titleStyle={fontSize.body}
+                  buttonStyle={[background.primary, button.medium]}
+                  onPress={this.doLogout}
+                />
+              ) : (
+                <Button
+                  title="去登录"
+                  titleStyle={fontSize.body}
+                  buttonStyle={[background.primary, button.medium]}
+                  onPress={this.toLogin}
+                />
+              )}
             </View>
           </View>
         </View>
