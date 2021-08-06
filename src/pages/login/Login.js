@@ -8,6 +8,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {connect} from 'react-redux';
 import qs from 'qs';
 import CryptoJS from 'crypto-js';
+import {Login as doLogin, UserInfo} from '../../api/api';
 
 export default connect(state => ({
   background: state.theme.ActiveThemeContent.background,
@@ -15,6 +16,8 @@ export default connect(state => ({
   padding: state.styles.padding,
   otherStyles: state.styles.otherStyles,
   fontSize: state.styles.fontSize,
+  isLogin: state.user.isLogin,
+  userInfo: state.user.userInfo,
 }))(
   class Login extends Component {
     constructor() {
@@ -48,41 +51,21 @@ export default connect(state => ({
       this.props.navigation.navigate({name: 'LocationMap', params: {}});
     };
 
-    doLogin = () => {
-      console.log('do Lodin', this.state.userName, this.state.password);
-
-      const body = qs.stringify({
+    doLogin = async () => {
+      const data = {
         userName: this.state.userName.value,
         password: CryptoJS.MD5(this.state.password.value).toString(),
-      });
-      console.log(body, typeof body);
-
-      // let formData = new FormData();
-      // formData.append('name', '张三');
-      // formData.append('age', 18);
-      fetch('http://localhost:3000/users/login', {
-        method: 'POST',
-        headers: {},
-        body: body,
-      })
-        .then(response => response.json())
-        .then(res => {
-          const data = res;
-          console.log('users/login', data);
-          fetch('http://localhost:3000/users/userinfo', {
-            method: 'GET',
-            headers: {
-              Authorization: 'Bearer ' + data.token,
-            },
-          })
-            .then(response => response.json())
-            .then(ret => {
-              console.log('getuserinfo', ret);
-            })
-            .catch(err => {
-              console.log('/users/userinfo', err);
-            });
+      };
+      const res = await doLogin(data);
+      if (res && res.data && res.data.code === 0) {
+        this.props.dispatch({
+          type: 'LOGIN',
+          userInfo: res.data.userInfo,
         });
+        if (this.props.isLogin) {
+          this.props.navigation.goBack();
+        }
+      }
     };
 
     setUserName = e => {
@@ -103,12 +86,21 @@ export default connect(state => ({
     };
 
     render() {
-      const {background, otherStyles, fontColor, fontSize, padding} =
-        this.props;
+      const {
+        background,
+        otherStyles,
+        fontColor,
+        fontSize,
+        padding,
+        isLogin,
+        userInfo,
+      } = this.props;
       return (
         <SafeAreaView style={[background.content, otherStyles.fillContent]}>
           <ScrollView>
-            <Text style={[fontColor.title, fontSize.xxlarge]}> 登录 </Text>
+            <Text style={[fontColor.title, fontSize.xxlarge]}>
+              登录 {isLogin ? 'login' : 'no'}
+            </Text>
 
             <Input
               placeholder="账号"
