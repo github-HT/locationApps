@@ -54,10 +54,34 @@ class Index extends React.Component {
             }}
           />
           <Stack.Screen name="UserInfo" component={UserInfo} />
-          <Stack.Screen name="About" component={About} />
-          <Stack.Screen name="Security" component={Security} />
-          <Stack.Screen name="OtherSetting" component={OtherSetting} />
-          <Stack.Screen name="ShareApps" component={ShareApps} />
+          <Stack.Screen
+            name="About"
+            component={About}
+            options={{
+              title: '关于我们',
+            }}
+          />
+          <Stack.Screen
+            name="Security"
+            component={Security}
+            options={{
+              title: '安全设置',
+            }}
+          />
+          <Stack.Screen
+            name="OtherSetting"
+            component={OtherSetting}
+            options={{
+              title: '通用设置',
+            }}
+          />
+          <Stack.Screen
+            name="ShareApps"
+            component={ShareApps}
+            options={{
+              title: '应用分享',
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     );
