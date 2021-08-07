@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import store from './store/index';
 import Index from './pages/Index';
 import {initLocalStorage} from './models/userModel';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
