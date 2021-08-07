@@ -1,15 +1,13 @@
 import {Link} from '@react-navigation/native';
 import React, {Component} from 'react';
-import {Text, BackHandler, View} from 'react-native';
+import {Alert, BackHandler, View} from 'react-native';
 import {Input, Button} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import {connect} from 'react-redux';
 import CryptoJS from 'crypto-js';
 import {doLogin} from '../../api/api';
-import {setUserInfo} from '../../models/userModel';
+import {initDeviceId, setUserInfo} from '../../models/userModel';
 import CHeader from '../../components/CHeader';
-import {Header} from 'react-native-elements/dist/header/Header';
 
 export default connect(state => ({
   background: state.theme.ActiveThemeContent.background,
@@ -53,9 +51,16 @@ export default connect(state => ({
     };
 
     doLogin = async () => {
+      const userName = this.state.userName.value;
+      const password = this.state.password.value;
+      if (!userName || !password) {
+        Alert.alert('提示', '用户名或密码不能为空！');
+        return;
+      }
       const data = {
         userName: this.state.userName.value,
         password: CryptoJS.MD5(this.state.password.value).toString(),
+        deviceId: await initDeviceId(),
       };
       const res = await doLogin(data);
       if (res && res.data && res.data.code === 0) {
