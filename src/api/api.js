@@ -1,6 +1,6 @@
 import {RequestAddToken} from './request.js';
 
-const baseUrl = 'http://localhost:3000';
+const baseUrl = 'http://192.168.31.100:3000';
 const Req = new RequestAddToken({
   baseUrl: baseUrl,
   timeout: 20 * 1000,
