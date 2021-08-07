@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import BackHome from '../../models/BackHome';
-import {LocationMap} from '../map/LocationMap';
+import LocationMap from '../map/LocationMap';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import UserCenter from '../userCenter/UserCenter';
 import {connect} from 'react-redux';
@@ -66,9 +66,11 @@ export default connect(state => ({
       return (
         <Tab.Navigator
           initialRouteName="LocationMap"
-          labeled={false}
+          labeled={true}
+          activeColor={fontColor.primary.color}
+          inactiveColor={fontColor.body_3.color}
           screenOptions={({route}) => ({
-            tabBarIcon: ({color, size, focused}) => {
+            tabBarIcon: ({color, focused}) => {
               const Icons = {
                 LocationMap: '\ue8ae', //require('../../assets/img/location.png'),
                 Discovery: '\ue8b9', //require('../../assets/img/home.png'),
@@ -78,15 +80,16 @@ export default connect(state => ({
                 <Text
                   style={[
                     iconfont.default,
-                    fontSize.xxxxlarge,
-                    focused ? fontColor.primary : fontColor.body,
+                    fontSize.xxlarge,
+                    focused ? fontColor.primary : fontColor.body_3,
                   ]}>
                   {Icons[route.name]}
                 </Text>
               );
             },
           })}
-          barStyle={background.content}>
+          style={[{height: 50}]}
+          barStyle={[background.content]}>
           <Tab.Screen
             name="LocationMap"
             iconkey="home"
