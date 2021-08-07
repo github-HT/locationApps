@@ -11,12 +11,16 @@ export async function doRegister(params = {}) {
 export async function doLogin(params = {}) {
   return await Req.post(baseUrl + '/users/login', params);
 }
-export async function getUserInfo(params = {}) {
-  return await Req.get(baseUrl + '/users/userinfo', params);
+export async function getUserInfo(config = {}) {
+  return await Req.get(baseUrl + '/users/userinfo', config);
 }
 export async function doLogOut(params = {}) {
   return await Req.LogOut();
 }
 export async function initSignToken(params = {}) {
   return await Req.getLocalToken();
+}
+export async function locationUpload(params = {}) {
+  console.log('locationUpload request', params);
+  return await Req.post(baseUrl + '/location/info/load', params);
 }
