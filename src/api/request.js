@@ -1,5 +1,6 @@
 import axios from 'axios';
 import QueryString from 'qs';
+import store from '../store';
 import {UtilStorage} from '../utils/utils';
 
 export class Request {
@@ -58,6 +59,7 @@ export class RequestAddToken extends Request {
         if (self.token) {
           config.headers = {
             Authorization: 'Bearer ' + self.token,
+            'Content-Type': 'application/x-www-form-urlencoded',
           };
         }
         config.data = QueryString.stringify(config.data);
@@ -78,10 +80,22 @@ export class RequestAddToken extends Request {
           self.token = data.token;
           UtilStorage.setItem('signToken', data.token);
         }
+        if (data.code === '-401') {
+          store.dispatch({
+            type: 'CLEAR_USER_INFO',
+          });
+        }
         return response;
       },
       function (error) {
         // Do something with response error
+        console.log(error.response.status);
+        if (error.response.status === 401) {
+          store.dispatch({
+            type: 'CLEAR_USER_INFO',
+          });
+        }
+
         return Promise.reject(error);
       },
     );
@@ -96,6 +110,9 @@ export class RequestAddToken extends Request {
     try {
       const res = await UtilStorage.getItem('signToken');
       console.log('getLocalToken', res);
+      if (res) {
+        this.token = res;
+      }
     } catch (error) {
       console.log('try catch err', error);
     }
