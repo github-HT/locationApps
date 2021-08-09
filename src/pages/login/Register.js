@@ -81,6 +81,7 @@ export default connect(state => ({
             tm: userInfo.register_date,
           });
         } else {
+          Alert.alert('提示', res.data.code + ' ' + res.data.msg);
         }
       }
     };

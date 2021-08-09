@@ -81,7 +81,7 @@ export class RequestAddToken extends Request {
           self.token = data.token;
           UtilStorage.setItem('signToken', data.token);
         }
-        if (data.code === '403') {
+        if (data.code === 403 || data.code === '403') {
           store.dispatch({
             type: 'CLEAR_USER_INFO',
           });

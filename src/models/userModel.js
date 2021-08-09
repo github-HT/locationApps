@@ -3,6 +3,7 @@ import store from '../store';
 import {UtilStorage} from '../utils/utils';
 import {v5 as uuidv5} from 'uuid';
 import {v1 as uuidv1} from 'uuid';
+import {Platform} from 'react-native';
 
 export function initLocalStorage() {
   initLocalUserInfo();
@@ -56,4 +57,11 @@ export async function initDeviceId(userInfo) {
   const res1 = await UtilStorage.setItem('LOCAL_DEVICE_UUID', uuid);
   console.log(uuid, res1);
   return uuid;
+}
+
+export async function getDeviceInfo() {
+  return {
+    DeviceId: await initDeviceId(),
+    ...Platform,
+  };
 }

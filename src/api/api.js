@@ -1,3 +1,4 @@
+import {getDeviceInfo} from '../models/userModel.js';
 import {RequestAddToken} from './request.js';
 
 const baseUrl =
@@ -10,12 +11,14 @@ export async function doRegister(params = {}) {
   return await Req.post(baseUrl, {
     action: 'register',
     params,
+    deviceInfo: await getDeviceInfo(),
   });
 }
 export async function doLogin(params = {}) {
   return await Req.post(baseUrl, {
     action: 'login',
     params,
+    deviceInfo: await getDeviceInfo(),
   });
 }
 export async function getUserInfo(params = {}) {
@@ -25,6 +28,7 @@ export async function getUserInfo(params = {}) {
   });
 }
 export async function doLogOut(params = {}) {
+  Req.LogOut();
   return await Req.post(baseUrl, {
     action: 'logout',
     params,
@@ -34,6 +38,8 @@ export async function initSignToken(params = {}) {
   return await Req.getLocalToken();
 }
 export async function locationUpload(params = {}) {
-  console.log('locationUpload request', params);
-  return await Req.post(baseUrl + '/location/info/load', params);
+  return await Req.post(baseUrl, {
+    action: 'locationUpload',
+    params,
+  });
 }

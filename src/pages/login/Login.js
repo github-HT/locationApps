@@ -58,14 +58,26 @@ export default connect(state => ({
         return;
       }
       const data = {
-        userName: this.state.userName.value,
+        username: this.state.userName.value,
         password: CryptoJS.MD5(this.state.password.value).toString(),
         deviceId: await initDeviceId(),
+        queryField: ['username'],
       };
       const res = await doLogin(data);
-      if (res && res.data && res.data.code === 0) {
-        setUserInfo(res.data.userInfo);
-        this.props.navigation.goBack();
+      console.log('doLogin', res?.data);
+      if (res && res.data) {
+        if (res.data.code === 0) {
+          const userInfo = res.data.userInfo;
+          setUserInfo({
+            userName: userInfo.username,
+            nickName: userInfo.nickname,
+            uid: res.data.uid,
+            tm: userInfo.register_date,
+          });
+          this.props.navigation.goBack();
+        } else {
+          Alert.alert('提示', `${res.data.code} ${res.data.msg}`);
+        }
       }
     };
 
