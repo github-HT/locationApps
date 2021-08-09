@@ -5,6 +5,8 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {connect} from 'react-redux';
 import {doRegister} from '../../api/api';
 import CHeader from '../../components/CHeader';
+import CryptoJS from 'crypto-js';
+import {setUserInfo} from '../../models/userModel';
 
 export default connect(state => ({
   background: state.theme.ActiveThemeContent.background,
@@ -42,11 +44,11 @@ export default connect(state => ({
     }
 
     backAction = () => {
-      this.props.navigation.goBack();
+      this.props.navigation.goBack(-2);
       return true;
     };
 
-    doRegister = () => {
+    doRegister = async () => {
       console.log(
         'do Register',
         this.state.userName,
@@ -60,21 +62,27 @@ export default connect(state => ({
         return;
       }
 
-      doRegister({
-        userName,
-        password,
-        confirmPassword,
-      })
-        .then(res => {
-          console.log('doRegister', res.data);
-          if (res.data.code === 0) {
-            Alert.alert('提示', '注册成功啦！');
-            this.backAction();
-          }
-        })
-        .catch(err => {
-          console.log('doRegister err', err);
-        });
+      const res = await doRegister({
+        username: userName,
+        nickname: userName,
+        password: CryptoJS.MD5(password).toString(),
+        pwd2: CryptoJS.MD5(confirmPassword).toString(),
+      });
+      if (res && res.data) {
+        if (res.data.code === 0) {
+          Alert.alert('提示', '注册成功啦！');
+          this.props.navigation.navigate('UserCenter');
+          const userInfo = res.data.userInfo;
+          // 存储并设置用户信息
+          setUserInfo({
+            userName: userInfo.username,
+            nickName: userInfo.nickname,
+            uid: res.data.uid,
+            tm: userInfo.register_date,
+          });
+        } else {
+        }
+      }
     };
 
     setUserName = e => {
@@ -103,15 +111,8 @@ export default connect(state => ({
     };
 
     render() {
-      const {
-        background,
-        otherStyles,
-        fontColor,
-        fontSize,
-        padding,
-        iconfont,
-        button,
-      } = this.props;
+      const {background, otherStyles, fontColor, fontSize, padding, button} =
+        this.props;
       return (
         <View style={[background.content, otherStyles.fillContent]}>
           <CHeader title="注册" />
