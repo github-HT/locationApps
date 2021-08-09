@@ -8,6 +8,7 @@ import ButtonContent from './children/BottomContent';
 
 export default connect(state => ({
   isLogin: state.user.isLogin,
+  userInfo: state.user.userInfo,
 }))(
   class LocationMap extends Component {
     constructor(props) {
@@ -40,41 +41,42 @@ export default connect(state => ({
 
     mapViewRef = null;
 
+    historyLocationList = [];
+    lastUploadTm = 0;
+
     onLocation = location => {
+      const {isLogin, userInfo} = this.props;
       console.log(Platform.OS, location);
       if (this.mapViewRef) {
-        this.setState({
-          locationConfig: {
-            accuracy: location.accuracy || this.state.locationConfig.accuracy,
-            altitude: location.altitude || this.state.locationConfig.altitude,
-            heading: location.heading || this.state.locationConfig.heading,
-            latitude: location.latitude || this.state.locationConfig.latitude,
-            longitude:
-              location.longitude || this.state.locationConfig.longitude,
-            speed: location.speed || this.state.locationConfig.speed,
-            timestamp:
-              location.timestamp || this.state.locationConfig.timestamp,
-          },
-        });
-        if (this.props.isLogin) {
+        const locationInfo = {
+          accuracy: location.accuracy || this.state.locationConfig.accuracy,
+          altitude: location.altitude || this.state.locationConfig.altitude,
+          heading: location.heading || this.state.locationConfig.heading,
+          latitude: location.latitude || this.state.locationConfig.latitude,
+          longitude: location.longitude || this.state.locationConfig.longitude,
+          speed: location.speed || this.state.locationConfig.speed,
+          timestamp: location.timestamp || this.state.locationConfig.timestamp,
+        };
+        this.setState({locationConfig: locationInfo});
+        const tm = Date.now();
+        const diffTm = tm - this.lastUploadTm;
+        const upload = diffTm > 10 * 1000;
+        const len = this.historyLocationList.length > 0;
+        console.log('upload tm ', upload, isLogin, len);
+        if (isLogin && upload && len) {
+          this.lastUploadTm = tm;
           locationUpload({
-            accuracy: location.accuracy || this.state.locationConfig.accuracy,
-            altitude: location.altitude || this.state.locationConfig.altitude,
-            heading: location.heading || this.state.locationConfig.heading,
-            latitude: location.latitude || this.state.locationConfig.latitude,
-            longitude:
-              location.longitude || this.state.locationConfig.longitude,
-            speed: location.speed || this.state.locationConfig.speed,
-            timestamp:
-              location.timestamp || this.state.locationConfig.timestamp,
-            platform: Platform.OS,
+            locationArr: [locationInfo], //this.historyLocationList,
+            uid: userInfo.uid,
           })
             .then(res => {
               console.log('locationUpload', res.data);
             })
             .catch(error => {
-              console.log('locationUpload catch err', error.response.status);
+              console.log('locationUpload catch err', error);
             });
+        } else if (isLogin) {
+          this.historyLocationList.push(locationInfo);
         }
 
         if (!this.state.isFixed) {
