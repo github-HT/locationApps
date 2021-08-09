@@ -58,11 +58,12 @@ export class RequestAddToken extends Request {
         // Do something before request is sent
         if (self.token) {
           config.headers = {
-            Authorization: 'Bearer ' + self.token,
-            'Content-Type': 'application/x-www-form-urlencoded',
+            Authorization: self.token,
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
           };
         }
-        config.data = QueryString.stringify(config.data);
+        config.data = JSON.stringify(config.data);
         return config;
       },
       function (error) {
@@ -80,7 +81,7 @@ export class RequestAddToken extends Request {
           self.token = data.token;
           UtilStorage.setItem('signToken', data.token);
         }
-        if (data.code === '-401') {
+        if (data.code === '403') {
           store.dispatch({
             type: 'CLEAR_USER_INFO',
           });
@@ -89,7 +90,7 @@ export class RequestAddToken extends Request {
       },
       function (error) {
         // Do something with response error
-        console.log(error.response.status);
+        console.log(error);
         if (error.response.status === 401) {
           store.dispatch({
             type: 'CLEAR_USER_INFO',
